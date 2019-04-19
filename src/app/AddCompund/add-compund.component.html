@@ -1,0 +1,244 @@
+<div class="modal-dialog modal-lg">
+  <!-- Main Modal content-->
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="mainPadding">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h6 class="panel-title">Add New</h6>
+          </div>
+          <div class="panel-body">
+            <div class="row" *ngIf='Type == "Ongoing Studies"'>
+              <form #ongoingStudies="ngForm" class="form-horizontal" role="form">
+                <!-- <div class="form-group row">
+                <div class="alert alert-success" *ngIf='message'>
+                  <strong>Success!</strong> {{message}}
+                </div>
+                <div class="alert alert-danger" *ngIf='error'>
+                  <strong>Danger!</strong> {{error}}
+                </div>
+              </div> -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Number</label>
+                      <input class="form-control" type="text" [(ngModel)]='ongStudyNumber' name="StudyNumber" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Name</label>
+                      <input class="form-control" type="text" [(ngModel)]="ongStudyName" name="StudyName" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK rep</label>
+                      <input class="form-control" type="text" [(ngModel)]="ongClinicalPKrep" name="ClinicalPKrep" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clin Pharm Rep</label>
+                      <input class="form-control" type="text" [(ngModel)]="ongClinPharmRep" name="ClinPharmRep" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Protocol</label>
+                      <input class="form-control" type="text" [(ngModel)]="ongProtocol" name="Protocol" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK report</label>
+                      <input class="form-control" type="text" [(ngModel)]="ongClinicalPKreport"
+                        name="ClinicalPKreport" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row divpadding">
+                  <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary">Add New</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
+                    [disabled]="!form.valid">Add New</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)='submitClick(form)'
+                    *ngIf='Title == "Edit Record"' [disabled]="!form.valid">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                    (click)='cancelChange(form)'>Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="row" *ngIf='Type == "Completed Studies"'>
+              <form #completedStudies="ngForm" class="form-horizontal" role="form">
+                <!-- <div class="form-group row">
+                <div class="alert alert-success" *ngIf='message'>
+                  <strong>Success!</strong> {{message}}
+                </div>
+                <div class="alert alert-danger" *ngIf='error'>
+                  <strong>Danger!</strong> {{error}}
+                </div>
+              </div> -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Number</label>
+                      <input class="form-control" type="text" [(ngModel)]='ctdStudyNumber' name="ctdStudyNumber" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Name</label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdStudyName" name="ctdStudyName" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK rep</label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdStudyConclusion"
+                        name="ctdStudyConclusion" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK report</label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdClinicalPKrep" name="ctdClinicalPKrep" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clin Pharm Rep</label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdClinPharmRep" name="ClinPharmRep" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Protocol</label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdProtocol" name="ctdProtocol" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK report
+                      </label>
+                      <input class="form-control" type="text" [(ngModel)]="ctdClinicalPKreport"
+                        name="ctdClinicalPKreport" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row divpadding">
+                  <div class="col-sm-12 pull-right">
+                    <button type="submit" class="btn btn-primary">Add New</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
+                    [disabled]="!form.valid">Add New</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)='submitClick(form)'
+                    *ngIf='Title == "Edit Record"' [disabled]="!form.valid">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                    (click)='cancelChange(form)'>Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="row" *ngIf='Type == "NCA and PBKB"'>
+              <form #NCAandPBKB="ngForm" class="form-horizontal" role="form">
+                <!-- <div class="form-group row">
+                <div class="alert alert-success" *ngIf='message'>
+                  <strong>Success!</strong> {{message}}
+                </div>
+                <div class="alert alert-danger" *ngIf='error'>
+                  <strong>Danger!</strong> {{error}}
+                </div>
+              </div> -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Number</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]='StudyNumber' name="StudyNumber" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Study Name</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]="StudyName" name="StudyName" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK rep</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinicalPKrep" name="ClinicalPKrep" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clin Pharm Rep</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinPharmRep" name="ClinPharmRep" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Protocol</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]="Protocol" name="Protocol" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+                      <label class="col-form-label">Clinical PK report</label>
+                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinicalPKreport" name="ClinicalPKreport" /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row divpadding">
+                  <div class="col-sm-12 pull-right">
+                    <button type="submit" class="btn btn-primary">Add New</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
+                    [disabled]="!form.valid">Add New</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)='submitClick(form)'
+                    *ngIf='Title == "Edit Record"' [disabled]="!form.valid">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                    (click)='cancelChange(form)'>Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
