@@ -1,0 +1,306 @@
+<div class="mainPadding">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Add New Record</h6>
+    </div>
+    <div class="panel-body">
+      <ul class="nav nav-tabs">
+        <li [ngClass]="(type === 'studiesOngoing') ?'nav active':'nav'">
+          <a class="setNavPadding" href="#studiesOngoing" data-toggle="tab">Studies Ongoing</a>
+        </li>
+        <li [ngClass]="(type === 'studiesCompleted') ?'nav active':'nav'">
+          <a class="setNavPadding" href="#studiesCompleted" data-toggle="tab">Studies Completed</a>
+        </li>
+        <li [ngClass]="(type==='NCAandPBKB' ) ?'nav active':'nav'">
+          <a class="setNavPadding" href="#NCAandPBKB" data-toggle="tab">Clinical Pharmacokinetics Information
+            Type of Analysis
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div [ngClass]="(type === 'studiesOngoing') ?'tab-pane fade in active':'tab-pane fade'" id="studiesOngoing">
+          <div class="row" *ngIf="loading === true">
+            <div class="row">
+              <div class="row align">
+                <div class="alert alert-info">
+                  <strong>Compound Selected :</strong> {{CompoundTitle}}
+                  <button type="button" class="btn btn-primary" (click)="naviateToonGoingStudies()">
+                    <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                    Add New Studies Ongoing
+                  </button>
+                </div>
+              </div>
+              <div class="row align" *ngIf="studiesobjLength === 0">
+                <div class="alert alert-danger"> <strong>Alert!</strong> There is no Completed studies Data Related
+                  with the selected Compound. </div>
+              </div>
+              <div class="row align">
+                <div class="row align" *ngIf="studiesobjLength !==0">
+                  <table class="table table-striped">
+                    <!-- <colgroup>
+                      <col class="col-md-1">
+                      <col class="col-md-3">
+                      <col class="col-md-2">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                    </colgroup> -->
+                    <thead class="tblHead">
+                      <tr>
+                        <th>Study Number</th>
+                        <th>Study Name</th>
+                        <th>PK rep</th>
+                        <th>Pharm Rep</th>
+                        <th>Protocol</th>
+                        <th>PK report</th>
+                        <th>Created By</th>
+                        <th>Modified</th>
+                        <th>Edit</th><!-- Need to hide for other users-->
+                      </tr>
+                    </thead>
+                    <tbody class="tblBody">
+                      <tr *ngFor="let ongDetail of ongItem">
+                        <td>{{ongDetail.Title}}</td>
+                        <td>{{ongDetail.ongStudyName}}</td>
+                        <td>{{ongDetail.ongClinicalPKrep}}</td>
+                        <td>{{ongDetail.ongClinPharmRep}}</td>
+                        <td>{{ongDetail.ongProtocol}}</td>
+                        <td>{{ongDetail.ongClinicalPKreport}}</td>
+                        <td>{{ongDetail.Editor.Title}}</td>
+                        <td>{{ongDetail.Modified | date}}</td>
+                        <td>
+                          <!-- Need to hide for other users-->
+                          <a [routerLink]="['/editStdStudies', ongDetail.Id, routeType, CompoundID]">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="(type === 'studiesCompleted') ?'tab-pane fade in active':'tab-pane fade'" id="studiesCompleted">
+          <div class="row" *ngIf="loading===true">
+            <div class="row">
+              <div class="row align">
+                <div class="alert alert-info">
+                  <strong>Compound Selected :</strong> {{CompoundTitle}}
+                  <button type="button" class="btn btn-primary" (click)="naviateToCompletedStudies()">
+                    <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                    Add New Completed Ongoing
+                  </button>
+                </div>
+              </div>
+              <div class="row align" *ngIf="completedStudiesobjLength===0">
+                <div class="alert alert-danger"> <strong>Alert!</strong> There is no Completed studies Data Related
+                  with the selected Compound. </div>
+              </div>
+              <div class="row align" *ngIf="completedStudiesobjLength !==0">
+                <table class="table table-striped">
+                  <!-- <colgroup>
+                      <col class="col-md-1">
+                      <col class="col-md-3">
+                      <col class="col-md-2">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                    </colgroup> -->
+                  <thead class="tblHead">
+                    <tr>
+                      <th>Study Number</th>
+                      <th>Study Name</th>
+                      <th>Study Conclusion</th>
+                      <th>PK rep</th>
+                      <th>Pharm Rep</th>
+                      <th>Protocol</th>
+                      <th>PK report</th>
+                      <th>Created By</th>
+                      <th>Modified</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="tblBody">
+                    <tr *ngFor="let ctdDetail of ctdItem">
+                      <td>{{ctdDetail.Title}}</td>
+                      <td>{{ctdDetail.ctdStudyName}}</td>
+                      <td>{{ctdDetail.ctdStudyConclusion}}</td>
+                      <td>{{ctdDetail.ctdClinicalPKrep}}</td>
+                      <td>{{ctdDetail.ctdClinPharmRep}}</td>
+                      <td>{{ctdDetail.ctdProtocol}}</td>
+                      <td>{{ctdDetail.ctdClinicalPKreport}}</td>
+                      <td>{{ctdDetail.Editor.Title}}</td>
+                      <td>{{ctdDetail.Modified | date}}</td>
+                      <td>
+                        <!-- Need to hide for other users-->
+                        <a [routerLink]="['/editCtdStudies', ctdDetail.Id, routeType, CompoundID]">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="(type === 'NCAandPBKB') ?'tab-pane fade in active':'tab-pane fade'" id="NCAandPBKB">
+          <div class="row" *ngIf="loading===true">
+            <div class="row">
+              <div class="row align">
+                <div class="alert alert-info"> <strong>Compound Selected :</strong> {{CompoundTitle}}
+                  <button type="button" class="btn btn-primary" (click)="naviateToNCAandPBKB()">
+                    <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                    Add New NCA and PBKB
+                  </button>
+                </div>
+              </div>
+              <div class="row align" *ngIf="NCAPBKBobjlength===0">
+                <div class="alert alert-danger"> <strong>Alert!</strong> There is no Completed studies Data Related with
+                  the selected Compound. </div>
+              </div>
+              <div class="row align" *ngIf="NCAPBKBobjlength !==0">
+                <table class="table table-striped">
+                  <thead class="tblHead">
+                    <tr>
+                      <th>Study Number</th>
+                      <th>Source</th>
+                      <th>Formal Analysis</th>
+                      <th>Secondary drug</th>
+                      <th>Study population</th>
+                      <th>Cmax</th>
+                      <th>Tmax</th>
+                      <th>T1/2</th>
+                      <th>Cmin or Ctau</th>
+                      <th>AUC0-t</th>
+                      <th>AUC0-inf</th>
+                      <th>Created By</th>
+                      <th>Modified</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody class="tblBody">
+                    <tr *ngFor="let ncaDetail of ncapbcapkItem">
+                      <td>{{ncaDetail.Title}}</td>
+                      <td>{{ncaDetail.ncaSource}}</td>
+                      <td>{{ncaDetail.ncaFormalAnalysis}}</td>
+                      <td>{{ncaDetail.ncaSecondarydrug}}</td>
+                      <td>{{ncaDetail.ncaStudypopulation}}</td>
+                      <td>{{ncaDetail.ncaCmax}}</td>
+                      <td>{{ncaDetail.ncaTmax}}</td>
+                      <td>{{ncaDetail.ncaToneandhalf}}</td>
+                      <td>{{ncaDetail.ncaCminorCtau}}</td>
+                      <td>{{ncaDetail.ncaAUC0t}}</td>
+                      <td>{{ncaDetail.ncaAUC0inf}}</td>
+                      <td>{{ncaDetail.Editor.Title}}</td>
+                      <td>{{ncaDetail.Modified | date}}</td>
+                      <td>
+                        <!-- Need to hide for other users-->
+                        <a [routerLink]="['/editNcapbpk', ncaDetail.Id, routeType, CompoundID]">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">&nbsp;</div>
+                <table class="table table-striped">
+                  <thead class="tblHead">
+                    <tr>
+                      <th>Study Number</th>
+                      <th>Source</th>
+                      <th>Formal Analysis</th>
+                      <th>Secondary drug</th>
+                      <th>Study population</th>
+                      <th>Cmax</th>
+                      <th>Tmax</th>
+                      <th>T1/2</th>
+                      <th>Cmin or Ctau</th>
+                      <th>AUC0-t</th>
+                      <th>AUC0-inf</th>
+                      <th>Created By</th>
+                      <th>Modified</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody class="tblBody">
+                    <tr *ngFor="let pbcaDetail of ncapbcapkItem">
+                      <td>{{pbcaDetail.pbpkStudyNumber}}</td>
+                      <td>{{pbcaDetail.pbpkSource}}</td>
+                      <td>{{pbcaDetail.pbpkFormalAnalysis}}</td>
+                      <td>{{pbcaDetail.pbpkSecondarydrug}}</td>
+                      <td>{{pbcaDetail.pbpkStudypopulation}}</td>
+                      <td>{{pbcaDetail.pbpkCmax}}</td>
+                      <td>{{pbcaDetail.pbpkTmax}}</td>
+                      <td>{{pbcaDetail.pbpkToneandhalf}}</td>
+                      <td>{{pbcaDetail.pbpkCminorCtau}}</td>
+                      <td>{{pbcaDetail.pbpkAUC0t}}</td>
+                      <td>{{pbcaDetail.pbpkAUC0inf}}</td>
+                      <td>{{pbcaDetail.Editor.Title}}</td>
+                      <td>{{pbcaDetail.Modified | date}}</td>
+                      <td>
+                        <!-- Need to hide for other users-->
+                        <a [routerLink]="['/editNcapbpk', pbcaDetail.Id, routeType, CompoundID]">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">&nbsp;</div>
+                <table class="table table-striped">
+                  <thead class="tblHead">
+                    <tr>
+                      <th>Study Number</th>
+                      <th>Source</th>
+                      <th>Formal Analysis</th>
+                      <th>Secondary drug</th>
+                      <th>Study population</th>
+                      <th>Cmax</th>
+                      <th>Tmax</th>
+                      <th>T1/2</th>
+                      <th>Cmin or Ctau</th>
+                      <th>AUC0-t</th>
+                      <th>AUC0-inf</th>
+                      <th>Created By</th>
+                      <th>Modified</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody class="tblBody">
+                    <tr *ngFor="let poppkDetail of ncapbcapkItem">
+                      <td>{{poppkDetail.poppkStudyNumber}}</td>
+                      <td>{{poppkDetail.poppkSource}}</td>
+                      <td>{{poppkDetail.poppkFormalAnalysis}}</td>
+                      <td>{{poppkDetail.poppkSecondarydrug}}</td>
+                      <td>{{poppkDetail.poppkStudypopulation}}</td>
+                      <td>{{poppkDetail.poppkCmax}}</td>
+                      <td>{{poppkDetail.poppkTmax}}</td>
+                      <td>{{poppkDetail.poppkToneandhalf}}</td>
+                      <td>{{poppkDetail.poppkCminorCtau}}</td>
+                      <td>{{poppkDetail.poppkAUC0t}}</td>
+                      <td>{{poppkDetail.poppkAUC0inf}}</td>
+                      <td>{{poppkDetail.Editor.Title}}</td>
+                      <td>{{poppkDetail.Modified | date}}</td>
+                      <td>
+                        <!-- Need to hide for other users-->
+                        <a [routerLink]="['/editNcapbpk', poppkDetail.Id, routeType, CompoundID]">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

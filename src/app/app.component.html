@@ -1,4 +1,4 @@
-<div class="mainPadding">
+<!-- <div class="mainPadding">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h5 class="mb-0 panel-title">Click PK</h5>
@@ -8,152 +8,42 @@
         <div class="col-md-12">
           <app-select-compound (OnprogramselectionChangedEvent)="OnSelectionChange($event)">
           </app-select-compound>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h6 class="panel-title">Summary</h6>
-            </div>
-            <div class="panel-body">
-              <ul class="nav nav-tabs">
-                <li class="nav active">
-                  <a class="setNavPadding" href="#studiesOngoing" data-toggle="tab">Studies Ongoing</a>
-                </li>
-                <li class="nav">
-                  <a class="setNavPadding" href="#studiesCompleted" data-toggle="tab">Studies Completed</a>
-                </li>
-                <li class="nav">
-                  <a class="setNavPadding" href="#NCAandPBKB" data-toggle="tab">Clinical Pharmacokinetics Information
-                    Type of Analysis
-                  </a>
-                </li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane fade in active" id="studiesOngoing">
-                  <h4>Studies Ongoing</h4>
-                  <a data-toggle='modal' id="btnAddnewInspection" class="btn btn-primary" data-toggle="modal"
-                    data-target="#ongoingRecord">
-                    Add New Ongoing Studies Record
-                  </a>
-                </div>
-                <div class="tab-pane fade" id="studiesCompleted">
-                  <h4>Studies Completed</h4>
-                  <a data-toggle='modal' id="btnAddnewInspection" class="btn btn-primary" data-toggle="modal"
-                    data-target="#completedRecord">
-                    Add New Completed Studies Record
-                  </a>
-                </div>
-                <div class="tab-pane fade" id="NCAandPBKB">
-                  <a data-toggle='modal' id="btnAddnewInspection" class="btn btn-primary" data-toggle="modal"
-                    data-target="#NCAandPBKBRecord">
-                    Add New NCA and PBKB Record
-                  </a>
-                  <h4>
-                    Clinical Pharmacokinetics Information Type of Analysis: NCA
-                  </h4>
-                  <h4>
-                    Clinical Pharmacokinetics Information Type of Analysis: Pop-PK
-                  </h4>
-                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="mainPadding">
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+</div> -->
+
+<div class="mainPadding">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class="mb-0 panel-title">Click PK</h5>
+    </div>
+    <div class="panel-body">
+      <div class="modal-body row">
+        <div class="col-md-12">
+          <div class="card card-outline-secondary">
+            <div class="panel panel-primary">
+              <div class="panel-body ">
+                <form class="form-inline">
+                  <label class="mr-sm-3 col-form-label" for="compound">Compound:</label>
+                  <select class="form-control mr-sm-3" id="compound" [(ngModel)]='selectedCompound' name='compound'
+                    (change)='onprogramselectionChanged()'>
+                    <option value="-- Select Compound --">-- Select Compound --</option>
+                    <option *ngFor="let compound of cacadedCompound" [ngValue]="compound">{{ compound.Title }}
+                    </option>
+                  </select>
+                </form>
               </div>
             </div>
-            <!-- <div class="panel-body" *ngIf='Compound == null'>
-              Please select a Program and a compound.
-              <br />if there isn't any program or compound added. Please add them first before adding ADME Data.
-            </div>
-            <div class="panel-body" *ngIf='Compound != null'>
-              <a data-toggle='modal' id="btnAddnewInspection" class="btn btn-primary" data-toggle="modal"
-                data-target="#addRecord">
-                Add a New Record
-              </a>
-              <div role="tabpanel" class="table-responsive" id="admedata">
-                <table class="table table-responsive">
-                  <thead class="thead-default">
-                    <tr>
-                      <th>Study#</th>
-                      <th>Dose (mg)</th>
-                      <th>Imax [Cmax] (uM)</th>
-                      <th>MW</th>
-                      <th>Igut (uM)</th>
-                      <th>FaFg</th>
-                      <th>Ka (per min)</th>
-                      <th>Qh (mL min)</th>
-                      <th>Rb</th>
-                      <th>Iin, Max</th>
-                      <th>Plasma PB (%)</th>
-                      <th>Microsomal PB (%)</th>
-                      <th>
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      </th>
-                      <th>
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </th>
-                    </tr>
-                    <tr *ngFor="let data of admeDATA" [class.active]="data.StableDose == true">
-                      <td>{{ data.StudyNumber }}</td>
-                      <td>{{ data.Dose }}</td>
-                      <td>{{ data.ImaxCmax }}</td>
-                      <td>{{ data.MW }}</td>
-                      <td>{{ data.Igut }}</td>
-                      <td>{{ data.FaFg }}</td>
-                      <td>{{ data.Ka }}</td>
-                      <td>{{ data.Qh }}</td>
-                      <td>{{ data.Rb }}</td>
-                      <td>{{ data.LinMax }}</td>
-                      <td>{{ data.PlasmaPB }}</td>
-                      <td>{{ data.MicrosomalPB }}</td>
-                      <td>
-                        <a data-toggle="modal" data-target='#editRecord' (click)='setseletedItem(data)'>
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                      </td>
-                      <td>
-                        <a data-toggle="modal" data-target="#deleteRecord" (click)='setseletedItem(data)'>
-                          <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr *ngIf="!admeDATA || admeDATA.length==0">
-                      <td colspan="5">
-                        <strong>No Records to display !!!</strong>
-                      </td>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!--Add Pop up HTML-->
-<div class="modal fade" id="ongoingRecord" role="dialog">
-  <app-add-compund [Type]='"Ongoing Studies"'>
-  </app-add-compund>
-  <!-- [data]='seletedItem' [Title]='"Add New"' [Program]='Program' [Compound]='Compound'
-  (OnCancelClickEvent)='OnChange($event)' -->
-</div>
-<div class="modal fade" id="completedRecord" role="dialog">
-  <app-add-compund [Type]='"Completed Studies"'>
-  </app-add-compund>
-</div>
-<div class="modal fade" id="NCAandPBKBRecord" role="dialog">
-  <app-add-compund [Type]='"NCA and PBKB"'>
-  </app-add-compund>
-</div>
-
-<!--Edit Pop up HTML-->
-<div class="modal fade" id="editRecord" role="dialog">
-  <app-edit-compund>
-  </app-edit-compund>
-  <!-- [data]='seletedItem' [Title]='"Edit Record"' [Program]='Program' [Compound]='Compound'
-  (OnCancelClickEvent)='OnChange($event)' -->
-</div>
-
-<!--Delete Pop up HTML-->
-<div class="modal fade" id="deleteRecord" role="dialog">
-  <app-delete-compund>
-  </app-delete-compund>
-  <!-- [data]='seletedItem' (OnDeleteClickEvent)='OnChange($event)' -->
-</div>
+<!-- <a routerLink="/home" routerLinkActive="active"></a> -->
+<router-outlet></router-outlet>

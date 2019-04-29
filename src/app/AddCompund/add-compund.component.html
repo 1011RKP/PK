@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div class="form-group row divpadding">
-                  <div class="col-sm-12">
+                  <div class="container pull-right">
                     <button type="submit" class="btn btn-primary">Add New</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
@@ -151,7 +151,7 @@
                   </div>
                 </div>
                 <div class="form-group row divpadding">
-                  <div class="col-sm-12 pull-right">
+                  <div class="container pull-right">
                     <button type="submit" class="btn btn-primary">Add New</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
@@ -174,64 +174,266 @@
                   <strong>Danger!</strong> {{error}}
                 </div>
               </div> -->
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Study Number</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]='StudyNumber' name="StudyNumber" /> -->
+                <div class="container">
+                  <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: NCA-->
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h4>Clinical Pharmacokinetics Information - Type of Analysis: NCA</h4>
+                      <!-- <h5>Compound: 54828 (pemigatinib) Type of Analysis: NCA</h5> -->
+                    </div>
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study Number</label>
+                            <input class="form-control" type="text" [(ngModel)]='ncaStudyNumber'
+                              name="ncaStudyNumber" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Source</label>
+                            <input class="form-control" type="text" [(ngModel)]='ncaSource' name="ncaSource" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Formal Analysis</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaFormalAnalysis"
+                              name="ncaFormalAnalysis" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Secondary drug</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaSecondarydrug"
+                              name="ncaSecondarydrug" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study population</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaStudypopulation"
+                              name="ncaStudypopulation" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Cmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaCmax" name="ncaCmax" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Tmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaTmax" name="ncaTmax" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">T1/2</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaToneandhalf"
+                              name="ncaToneandhalf" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Cmin or Ctau</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaCminorCtau" name="ncaCminorCtau" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">AUC0-t</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaAUC0t" name="ncaAUC0t" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">AUC0-inf</label>
+                            <input class="form-control" type="text" [(ngModel)]="ncaAUC0inf" name="ncaAUC0inf" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Study Name</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]="StudyName" name="StudyName" /> -->
+                  <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: PBPK-->
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h4>Clinical Pharmacokinetics Information - Type of Analysis: PBPK</h4>
+                      <!-- <h5>Compound: 54828 (pemigatinib) Type of Analysis: PBPK</h5> -->
+                    </div>
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study Number</label>
+                            <input class="form-control" type="text" [(ngModel)]='pbpkStudyNumber'
+                              name="pbpkStudyNumber" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Source</label>
+                            <input class="form-control" type="text" [(ngModel)]='pbpkSource' name="pbpkSource" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Formal Analysis</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkFormalAnalysis"
+                              name="pbpkFormalAnalysis" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Secondary drug</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkSecondarydrug"
+                              name="pbpkSecondarydrug" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study population</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkStudypopulation"
+                              name="pbpkStudypopulation" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Cmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkCmax" name="pbpkCmax" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Tmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkTmax" name="pbpkTmax" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">T1/2</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkToneandhalf"
+                              name="pbpkToneandhalf" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Cmin or Ctau</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkCminorCtau"
+                              name="pbpkCminorCtau" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">AUC0-t</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkAUC0t" name="pbpkAUC0t" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">AUC0-inf</label>
+                            <input class="form-control" type="text" [(ngModel)]="pbpkAUC0inf" name="pbpkAUC0inf" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Clinical PK rep</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinicalPKrep" name="ClinicalPKrep" /> -->
+                  <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: Pop -PK-->
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h4>Clinical Pharmacokinetics Information - Type of Analysis: Pop -PK</h4>
+                      <!-- <h5>Compound: 54828 (pemigatinib) Type of Analysis: Pop -PK</h5> -->
+                    </div>
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study Number</label>
+                            <input class="form-control" type="text" [(ngModel)]='poppkStudyNumber'
+                              name="poppkStudyNumber" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Source</label>
+                            <input class="form-control" type="text" [(ngModel)]='poppkSource' name="poppkSource" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Formal Analysis</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkFormalAnalysis"
+                              name="poppkFormalAnalysis" />
+                          </div>
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Secondary drug</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkSecondarydrug"
+                              name="poppkSecondarydrug" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Study population</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkStudypopulation"
+                              name="poppkStudypopulation" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">Cmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkCmax" name="poppkCmax" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Tmax</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkTmax" name="poppkTmax" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">T1/2</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkToneandhalf"
+                              name="poppkToneandhalf" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">Cmin or Ctau</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkCminorCtau"
+                              name="poppkCminorCtau" />
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="col-form-label">AUC0-t</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkAUC0t" name="poppkAUC0t" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 algin">
+                            <label class="col-form-label">AUC0-inf</label>
+                            <input class="form-control" type="text" [(ngModel)]="poppkAUC0inf" name="poppkAUC0inf" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Clin Pharm Rep</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinPharmRep" name="ClinPharmRep" /> -->
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Protocol</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]="Protocol" name="Protocol" /> -->
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                      <label class="col-form-label">Clinical PK report</label>
-                      <!-- <input class="form-control" type="text" [(ngModel)]="ClinicalPKreport" name="ClinicalPKreport" /> -->
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row divpadding">
-                  <div class="col-sm-12 pull-right">
-                    <button type="submit" class="btn btn-primary">Add New</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
+                  <div class="form-group row divpadding">
+                    <div class="container pull-right">
+                      <button type="submit" class="btn btn-primary">Add New</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <!-- <button type="submit" class="btn btn-primary" (click)='submitClick(form)' *ngIf='Title == "Add New"'
                     [disabled]="!form.valid">Add New</button>
                   <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)='submitClick(form)'
                     *ngIf='Title == "Edit Record"' [disabled]="!form.valid">Update</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"
                     (click)='cancelChange(form)'>Cancel</button> -->
+                    </div>
                   </div>
                 </div>
               </form>

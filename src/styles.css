@@ -4,11 +4,11 @@
   border-color: #807d80 !important;
 }
 
-.btn {
+/*.btn {
   padding: 2px 8px !important;
   font-size: 12px !important;
   font-weight: bold !important;
-}
+}*/
 
 .divpadding {
   padding-top: 16px !important;
@@ -71,6 +71,3 @@
   background-color: rgb(232, 235, 236) !important;
 }
 
-.mainPadding {
-  padding: 30px;
-}

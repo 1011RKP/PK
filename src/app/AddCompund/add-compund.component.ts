@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewContainerRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Compound, ADMEData, } from '../data';
+import { Compound } from '../data';
 import { AppService } from '../app.service';
 import { parse } from 'url';
 
