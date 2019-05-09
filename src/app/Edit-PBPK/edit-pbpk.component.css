@@ -1,0 +1,37 @@
+.tblHead {
+  background: #2a8dd4;
+  color: white;
+}
+
+.tblBody tr:last-child {
+  border-bottom: 2px solid #2a8dd4;
+}
+
+.align {
+  margin-left: 10px !important;
+}
+
+.adminLink {
+  float: right;
+  margin-top: -25px;
+  color: white !important;
+}
+
+.mainPadding {
+  /* padding-right: 30px; */
+  /* padding-left: 30px; */
+}
+
+.btnPadding {
+  margin-right: 5px !important;
+}
+
+h4 {
+  color: white !important;
+  margin: 0 !important;
+}
+
+.algin {
+  margin-left: 10px !important;
+  margin-right: -10px !important;
+}

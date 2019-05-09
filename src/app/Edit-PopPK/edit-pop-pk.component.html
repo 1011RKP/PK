@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="mainPadding">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">
+          <span *ngIf="type !== 'New'">Edit </span>
+          <span *ngIf="type === 'New'">Add New </span>
+          Record for Clinical Pharmacokinetics Information - Type of Analysis: Pop-PK
+        </h6>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <form #PopPK="ngForm" class="form-horizontal" role="form">
+            <div class="container">
+              <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: Pop -PK-->
+              <div class=form-group>
+                <div class="container">
+                  <div class="alert alert-info">
+                    <strong>Compound Selected :</strong> {{CompoundTitle}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6 ">
+                    <label class="col-form-label">Study Number</label>
+                    <input class="form-control" type="text" [(ngModel)]='poppkStudyNumber' name="poppkStudyNumber" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Source</label>
+                    <input class="form-control" type="text" [(ngModel)]='poppkSource' name="poppkSource" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6 ">
+                    <label class="col-form-label">Formal Analysis</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkFormalAnalysis"
+                      name="poppkFormalAnalysis" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Secondary drug</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkSecondarydrug"
+                      name="poppkSecondarydrug" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Study population</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkStudypopulation"
+                      name="poppkStudypopulation" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Cmax</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkCmax" name="poppkCmax" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Tmax</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkTmax" name="poppkTmax" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label">T1/2</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkToneandhalf" name="poppkToneandhalf" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6">
+                    <label class="col-form-label">Cmin or Ctau</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkCminorCtau" name="poppkCminorCtau" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-form-label">AUC0-t</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkAUC0t" name="poppkAUC0t" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="col-sm-6">
+                    <label class="col-form-label">AUC0-inf</label>
+                    <input class="form-control" type="text" [(ngModel)]="poppkAUC0t" name="poppkAUC0inf" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row divpadding">
+                <div class="container pull-right">
+                  <button type="submit" class="btn btn-primary btnPadding" *ngIf='type === "New"'
+                    (click)='postPopPk(PopPK)' [disabled]="!PopPK.valid">
+                    <i class="fa fa-plus-circle" aria-hidden="true"> </i> Add New
+                  </button>
+                  <button type="submit" class="btn btn-primary btnPadding" *ngIf='type !== "New"'
+                    (click)='editPopPk(PopPK)' [disabled]="!PopPK.valid">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit Record</button>
+                  <button type="button" class="btn btn-default" (click)='cancel()'>
+                    <i class="fa fa-times" aria-hidden="true"> </i>Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

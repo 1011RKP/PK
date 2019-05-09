@@ -1,0 +1,101 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="mainPadding">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 style="margin:0px!important;font-size:20px!important;font-weight:bold!important">Delete Confirmation
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="panel-body" *ngIf="EventType ==='ongItem'">
+              <div class="row">
+                <div class="alert alert-danger" *ngIf="stdData !== undefined">
+                  <strong>Please click confirm button to delete the record with <b>Study Number:</b>
+                    {{stdData.ongStudyName}}?</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-6 col-md-6">
+                  <button id="deleteDisable" type="button" class="btn btn-danger" (click)='deletStdOngoingRecord()'
+                    data-dismiss="modal">
+                    <i class="fa fa-trash-o"> Confirm</i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" *ngIf="EventType ==='ctdItem'">
+              <div class="row">
+                <div class="alert alert-danger" *ngIf="ctdData !== undefined">
+                  <strong>Please click confirm button to delete the record with <b>Study Number:</b>
+                    {{ctdData.ctdStudyName}}?</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-6 col-md-6">
+                  <button id="deleteDisable" type="button" class="btn btn-danger" (click)='deletCtdOngoingRecord()'
+                    data-dismiss="modal">
+                    <i class="fa fa-trash-o"> Confirm</i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" *ngIf="EventType ==='NCAItem'">
+              <div class="row">
+                <div class="alert alert-danger" *ngIf="NCAData !== undefined">
+                  <strong>Please click confirm button to delete the record with <b>Study Number:</b>
+                    {{NCAData.Id}}?</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-6 col-md-6">
+                  <button id="deleteDisable" type="button" class="btn btn-danger" (click)='deletNCARecord()'
+                    data-dismiss="modal">
+                    <i class="fa fa-trash-o"> Confirm</i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" *ngIf="EventType ==='PBPKItem'">
+              <div class="row">
+                <div class="alert alert-danger" *ngIf="PBPKData !== undefined">
+                  <strong>Please click confirm button to delete the record with <b>Study Number:</b>
+                    {{PBPKData.Id}}?</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-6 col-md-6">
+                  <button id="deleteDisable" type="button" class="btn btn-danger" (click)='deletPBPKRecord()'
+                    data-dismiss="modal">
+                    <i class="fa fa-trash-o"> Confirm</i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" *ngIf="EventType ==='PopPKItem'">
+              <div class="row">
+                <div class="alert alert-danger" *ngIf="PopPKData !== undefined">
+                  <strong>Please click confirm button to delete the record with <b>Study Number:</b>
+                    {{PopPKData.Id}}?</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-6 col-md-6">
+                  <button id="deleteDisable" type="button" class="btn btn-danger" (click)='deletPopPKRecord()'
+                    data-dismiss="modal">
+                    <i class="fa fa-trash-o"> Confirm</i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

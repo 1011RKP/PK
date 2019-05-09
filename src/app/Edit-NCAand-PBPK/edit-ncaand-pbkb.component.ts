@@ -85,7 +85,7 @@ export class EditNCAandPBKBComponent implements OnInit {
     if (type === "New") {
       this.getCompoundonload();
     } else {
-      this.getOngoingStudiesData(itemid);
+      this.getNCAandPBKB(itemid);
     }
   }
 
@@ -134,7 +134,7 @@ export class EditNCAandPBKBComponent implements OnInit {
         });
   }
 
-  postDatatoOngoingStudies(form: NgForm): void {
+  posNCAandPBKB(form: NgForm): void {
     if (this.CompoundID !== '') {
       this._appService.getService().subscribe(
         (res) => {
@@ -211,7 +211,7 @@ export class EditNCAandPBKBComponent implements OnInit {
     }
   }
 
-  editongoingStudies(form: NgForm): void {
+  editNCAandPBKB(form: NgForm): void {
     if (this.itemid !== '') {
       this._appService.getService().subscribe(
         (res) => {
@@ -273,8 +273,8 @@ export class EditNCAandPBKBComponent implements OnInit {
     }
   }
 
-  getOngoingStudiesData(id: string): void {
-    const select = '?$select=Id,Title,ongStudyName,ongClinicalPKrep,ongClinicalPKreport,ongClinPharmRep,Created,ongProtocol,Editor/Title,Modified,Compound/Id,Compound/Title';
+  getNCAandPBKB(id: string): void {
+    const select = '?$select=Id,Title,ncaSource,ncaFormalAnalysis,ncaSecondarydrug,ncaStudypopulation,ncaCmax,ncaTmax,ncaToneandhalf,ncaCminorCtau,ncaAUC0t,ncaAUC0inf,poppkStudyNumber,poppkSource,poppkFormalAnalysis,poppkSecondarydrug,poppkStudypopulation,poppkCmax,poppkTmax,poppkToneandhalf,poppkCminorCtau,poppkAUC0t,poppkAUC0inf,pbpkStudyNumber,pbpkSource, pbpkFormalAnalysis,pbpkSecondarydrug,pbpkStudypopulation,pbpkCmax,pbpkTmax,pbpkToneandhalf,pbpkCminorCtau,pbpkAUC0t,pbpkAUC0inf,Created,Editor/Title,Modified,Compound/Id,Compound/Title';
     const expand = '&$expand=Compound/Id,Editor/Title,Compound/Title';
     const filter = '&$filter=(Id eq ' + id + ')';
     const order = '&$orderby=Created desc';

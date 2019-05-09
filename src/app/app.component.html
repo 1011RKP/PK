@@ -1,3 +1,39 @@
+<div class="row">
+  <div class="mainPadding">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h5 class="panel-title">Click PK</h5>
+        <h5 *ngIf="isAdminTrue !== false" id="compLink" class="panel-title">
+          <a target="_blank" class="compLink" href="{{CompoundLsitLink}}">
+            <b>C</b>
+          </a>
+        </h5>
+      </div>
+      <div class="panel-body">
+        <div class="modal-body row">
+          <div class="col-md-12">
+            <div class="card card-outline-secondary">
+              <div class="panel panel-primary">
+                <div class="panel-body ">
+                  <form class="form-inline">
+                    <label class="mr-sm-3 col-form-label" for="compound">Compound:</label>
+                    <select class="form-control mr-sm-3" id="compound" [(ngModel)]='selectedCompound' name='compound'
+                      (change)='onprogramselectionChanged()'>
+                      <option value="-- Select Compound --">-- Select Compound --</option>
+                      <option *ngFor="let compound of cacadedCompound" [ngValue]="compound">{{ compound.Title }}
+                      </option>
+                    </select>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
 <!-- <div class="mainPadding">
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -16,34 +52,3 @@
 <!-- <div class="mainPadding">
   <a routerLink="/home" routerLinkActive="active">Home</a>
 </div> -->
-
-<div class="mainPadding">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h5 class="mb-0 panel-title">Click PK</h5>
-    </div>
-    <div class="panel-body">
-      <div class="modal-body row">
-        <div class="col-md-12">
-          <div class="card card-outline-secondary">
-            <div class="panel panel-primary">
-              <div class="panel-body ">
-                <form class="form-inline">
-                  <label class="mr-sm-3 col-form-label" for="compound">Compound:</label>
-                  <select class="form-control mr-sm-3" id="compound" [(ngModel)]='selectedCompound' name='compound'
-                    (change)='onprogramselectionChanged()'>
-                    <option value="-- Select Compound --">-- Select Compound --</option>
-                    <option *ngFor="let compound of cacadedCompound" [ngValue]="compound">{{ compound.Title }}
-                    </option>
-                  </select>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- <a routerLink="/home" routerLinkActive="active"></a> -->
-<router-outlet></router-outlet>

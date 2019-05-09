@@ -1,0 +1,435 @@
+<div class="row">
+  <div class="mainPadding">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Clinic PK Reports</h6>
+      </div>
+      <div class="panel-body">
+        <ul class="nav nav-tabs">
+          <li [ngClass]="(type === 'studiesOngoing') ?'nav active':'nav'">
+            <a class="setNavPadding" href="#studiesOngoing" data-toggle="tab">Studies Ongoing</a>
+          </li>
+          <li [ngClass]="(type === 'studiesCompleted') ?'nav active':'nav'">
+            <a class="setNavPadding" href="#studiesCompleted" data-toggle="tab">Studies Completed</a>
+          </li>
+          <li [ngClass]="(type==='NCAandPBKB' ) ?'nav active':'nav'">
+            <a class="setNavPadding" href="#NCAandPBKB" data-toggle="tab">NCA, PBPK and Pop-PK
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div [ngClass]="(type === 'studiesOngoing') ?'tab-pane fade in active':'tab-pane fade'" id="studiesOngoing">
+            <div class="row" *ngIf="loading === true">
+              <div class="row">
+                <div class="row align">
+                  <div class="alert alert-info">
+                    <strong>Compound Selected :</strong> {{CompoundTitle}}
+                    <button *ngIf="isAdminTrue !== false" type="button" class="btn btn-primary"
+                      (click)="naviateToonGoingStudies()">
+                      <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                      Add New Studies Ongoing
+                    </button>
+                  </div>
+                </div>
+                <div class="row align" *ngIf="studiesobjLength === 0">
+                  <div class="alert alert-danger"> <strong>Alert!</strong> There is no Completed studies Data Related
+                    with the selected Compound. </div>
+                </div>
+                <div class="row align">
+                  <div class="row align" *ngIf="studiesobjLength !==0">
+                    <table class="table table-striped">
+                      <colgroup>
+                        <col class="col-md-1">
+                        <col class="col-md-5">
+                        <col class="col-md-1">
+                        <col class="col-md-1">
+                        <col class="col-md-1">
+                        <col class="col-md-1">
+                        <col class="col-md-1">
+                        <col class="col-md-1">
+                      </colgroup>
+                      <thead class="tblHead">
+                        <tr>
+                          <th>Study Number</th>
+                          <th>Study Name</th>
+                          <th>PK rep</th>
+                          <th>Pharm Rep</th>
+                          <th>Protocol</th>
+                          <th>PK report</th>
+                          <th>Created By</th>
+                          <th>Modified</th>
+                          <th *ngIf="isAdminTrue !== false">Edit</th><!-- Need to hide for other users-->
+                          <th *ngIf="isAdminTrue !== false">Delete</th><!-- Need to hide for other users-->
+                        </tr>
+                      </thead>
+                      <tbody class="tblBody">
+                        <tr *ngFor="let ongDetail of ongItem">
+                          <td>{{ongDetail.Title}}</td>
+                          <td>{{ongDetail.ongStudyName}}</td>
+                          <td>{{ongDetail.ongClinicalPKrep}}</td>
+                          <td>{{ongDetail.ongClinPharmRep}}</td>
+                          <td *ngIf="ongDetail.ongProtocol !== null">
+                            <a target="_blank" href="{{ongDetail.ongProtocol.Url}}">
+                              {{ongDetail.ongProtocol.Description}}
+                            </a>
+                            <!-- {{ongDetail.ongProtocol}} -->
+                          </td>
+                          <td *ngIf="ongDetail.ongProtocol === null">
+                            {{ongDetail.ongProtocol}}
+                          </td>
+                          <td *ngIf="ongDetail.ongClinicalPKreport !== null">
+                            <a target="_blank" href="{{ongDetail.ongClinicalPKreport.Url}}">
+                              {{ongDetail.ongClinicalPKreport.Description}}
+                            </a>
+                            <!-- {{ongDetail.ongProtocol}} -->
+                          </td>
+                          <td *ngIf="ongDetail.ongClinicalPKreport === null">
+                            {{ongDetail.ongClinicalPKreport}}
+                          </td>
+                          <!-- <td>{{ongDetail.ongClinicalPKreport}}</td> -->
+                          <td>{{ongDetail.Editor.Title}}</td>
+                          <td>{{ongDetail.Modified | date}}</td>
+                          <td *ngIf="isAdminTrue !== false">
+                            <!-- Need to hide for other users-->
+                            <a [routerLink]="['/editStdStudies', ongDetail.Id, routeType, CompoundID]">
+                              <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            </a>
+                          </td>
+                          <td *ngIf="isAdminTrue !== false">
+                            <a class="dltLink" data-toggle="modal" data-target="#stdongoingdeleteRecord"
+                              (click)='setongItemseletedItem(ongDetail)'>
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="(type === 'studiesCompleted') ?'tab-pane fade in active':'tab-pane fade'"
+            id="studiesCompleted">
+            <div class="row" *ngIf="loading===true">
+              <div class="row">
+                <div class="row align">
+                  <div class="alert alert-info">
+                    <strong>Compound Selected :</strong> {{CompoundTitle}}
+                    <button *ngIf="isAdminTrue !== false" type="button" class="btn btn-primary"
+                      (click)="naviateToCompletedStudies()">
+                      <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                      Add New Completed Ongoing
+                    </button>
+                  </div>
+                </div>
+                <div class="row align" *ngIf="completedStudiesobjLength===0">
+                  <div class="alert alert-danger"> <strong>Alert!</strong> There is no Completed studies
+                    Data Related
+                    with the selected Compound. </div>
+                </div>
+                <div class="row align" *ngIf="completedStudiesobjLength !==0">
+                  <table class="table table-striped">
+                    <!-- <colgroup>
+                      <col class="col-md-1">
+                      <col class="col-md-3">
+                      <col class="col-md-2">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                      <col class="col-md-1">
+                    </colgroup> -->
+                    <thead class="tblHead">
+                      <tr>
+                        <th>Study Number</th>
+                        <th>Study Name</th>
+                        <th>Study Conclusion</th>
+                        <th>PK rep</th>
+                        <th>Pharm Rep</th>
+                        <th>Protocol</th>
+                        <th>PK report</th>
+                        <th>Created By</th>
+                        <th>Modified</th>
+                        <th *ngIf="isAdminTrue !== false">Edit</th>
+                        <th *ngIf="isAdminTrue !== false">Delete</th><!-- Need to hide for other users-->
+                      </tr>
+                    </thead>
+
+                    <tbody class="tblBody">
+                      <tr *ngFor="let ctdDetail of ctdItem">
+                        <td>{{ctdDetail.Title}}</td>
+                        <td>{{ctdDetail.ctdStudyName}}</td>
+                        <td>{{ctdDetail.ctdStudyConclusion}}</td>
+                        <td>{{ctdDetail.ctdClinicalPKrep}}</td>
+                        <td>{{ctdDetail.ctdClinPharmRep}}</td>
+                        <!-- <td>{{ctdDetail.ctdProtocol}}</td>
+                      <td>{{ctdDetail.ctdClinicalPKreport}}</td> -->
+                        <td *ngIf="ctdDetail.ctdProtocol !== null">
+                          <a target="_blank" href="{{ctdDetail.ctdProtocol.Url}}">
+                            {{ctdDetail.ctdProtocol.Description}}
+                          </a>
+                        </td>
+                        <td *ngIf="ctdDetail.ctdProtocol === null">
+                          {{ctdDetail.ctdProtocol}}
+                        </td>
+                        <td *ngIf="ctdDetail.ctdClinicalPKreport !== null">
+                          <a target="_blank" href="{{ctdDetail.ctdClinicalPKreport.Url}}">
+                            {{ctdDetail.ctdClinicalPKreport.Description}}
+                          </a>
+                        </td>
+                        <td *ngIf="ctdDetail.ctdClinicalPKreport === null">
+                          {{ctdDetail.ctdClinicalPKreport}}
+                        </td>
+                        <td>{{ctdDetail.Editor.Title}}</td>
+                        <td>{{ctdDetail.Modified | date}}</td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a [routerLink]="['/editCtdStudies', ctdDetail.Id, routeType, CompoundID]">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <a class="dltLink" data-toggle="modal" data-target="#ctddeleteRecord"
+                            (click)='setctdItemseletedItem(ctdDetail)'>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="(type === 'NCAandPBKB') ?'tab-pane fade in active':'tab-pane fade'" id="NCAandPBKB">
+            <div class="row" *ngIf="loading===true">
+              <div class="row">
+                <div class="row align">
+                  <div class="alert alert-info"> <strong>Compound Selected :</strong> {{CompoundTitle}}
+                    <button type="button" class="btn btn-primary" (click)="naviateToNCA()">
+                      <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                      Add New NCA
+                    </button>
+                  </div>
+                </div>
+                <div class="row align" *ngIf="NCALength===0">
+                  <div class="alert alert-danger"> <strong>Alert!</strong> There is no NCA Data
+                    Related with
+                    the selected Compound. </div>
+                </div>
+                <div class="row align" *ngIf="NCALength !==0">
+                  <table class="table table-striped">
+                    <thead class="tblHead">
+                      <tr>
+                        <th>Study Number</th>
+                        <th>Source</th>
+                        <th>Formal Analysis</th>
+                        <th>Secondary drug</th>
+                        <th>Study population</th>
+                        <th>Cmax</th>
+                        <th>Tmax</th>
+                        <th>T1/2</th>
+                        <th>Cmin or Ctau</th>
+                        <th>AUC0-t</th>
+                        <th>AUC0-inf</th>
+                        <th>Created By</th>
+                        <th>Modified</th>
+                        <th *ngIf="isAdminTrue !== false">Edit</th>
+                        <th *ngIf="isAdminTrue !== false">Delete</th><!-- Need to hide for other users-->
+                      </tr>
+                    </thead>
+                    <tbody class="tblBody">
+                      <tr *ngFor="let ncaDetail of NCAItem">
+                        <td>{{ncaDetail.Title}}</td>
+                        <td>{{ncaDetail.ncaSource}}</td>
+                        <td>{{ncaDetail.ncaFormalAnalysis}}</td>
+                        <td>{{ncaDetail.ncaSecondarydrug}}</td>
+                        <td>{{ncaDetail.ncaStudypopulation}}</td>
+                        <td>{{ncaDetail.ncaCmax}}</td>
+                        <td>{{ncaDetail.ncaTmax}}</td>
+                        <td>{{ncaDetail.ncaToneandhalf}}</td>
+                        <td>{{ncaDetail.ncaCminorCtau}}</td>
+                        <td>{{ncaDetail.ncaAUC0t}}</td>
+                        <td>{{ncaDetail.ncaAUC0inf}}</td>
+                        <td>{{ncaDetail.Editor.Title}}</td>
+                        <td>{{ncaDetail.Modified | date}}</td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a [routerLink]="['/editNCA', ncaDetail.Id, routeType, CompoundID]">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a class="dltLink" data-toggle="modal" data-target="#NBAdeleteRecord"
+                            (click)='setNCASeletedItem(ncaDetail)'>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row align">
+                  <div class="alert alert-info"> <strong>Compound Selected :</strong> {{CompoundTitle}}
+                    <button type="button" class="btn btn-primary" (click)="naviateToPBPK()">
+                      <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                      Add New PBPK
+                    </button>
+                  </div>
+                </div>
+                <div class="row align" *ngIf="PBPKLength===0">
+                  <div class="alert alert-danger"> <strong>Alert!</strong> There is no PBPK Data
+                    Related with
+                    the selected Compound. </div>
+                </div>
+                <div class="row align" *ngIf="PBPKLength !==0">
+                  <table class="table table-striped">
+                    <thead class="tblHead">
+                      <tr>
+                        <th>Study Number</th>
+                        <th>Source</th>
+                        <th>Formal Analysis</th>
+                        <th>Secondary drug</th>
+                        <th>Study population</th>
+                        <th>Cmax</th>
+                        <th>Tmax</th>
+                        <th>T1/2</th>
+                        <th>Cmin or Ctau</th>
+                        <th>AUC0-t</th>
+                        <th>AUC0-inf</th>
+                        <th>Created By</th>
+                        <th>Modified</th>
+                        <th *ngIf="isAdminTrue !== false">Edit</th>
+                        <th *ngIf="isAdminTrue !== false">Delete</th><!-- Need to hide for other users-->
+                      </tr>
+                    </thead>
+                    <tbody class="tblBody">
+                      <tr *ngFor="let pbpkDetail of PBPKItem">
+                        <td>{{pbpkDetail.Title}}</td>
+                        <td>{{pbpkDetail.pbpkSource}}</td>
+                        <td>{{pbpkDetail.pbpkFormalAnalysis}}</td>
+                        <td>{{pbpkDetail.pbpkSecondarydrug}}</td>
+                        <td>{{pbpkDetail.pbpkStudypopulation}}</td>
+                        <td>{{pbpkDetail.pbpkCmax}}</td>
+                        <td>{{pbpkDetail.pbpkTmax}}</td>
+                        <td>{{pbpkDetail.pbpkToneandhalf}}</td>
+                        <td>{{pbpkDetail.pbpkCminorCtau}}</td>
+                        <td>{{pbpkDetail.pbpkAUC0t}}</td>
+                        <td>{{pbpkDetail.pbpkAUC0inf}}</td>
+                        <td>{{pbpkDetail.Editor.Title}}</td>
+                        <td>{{pbpkDetail.Modified | date}}</td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a [routerLink]="['/editPBPK', pbpkDetail.Id, routeType, CompoundID]">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a class="dltLink" data-toggle="modal" data-target="#PBPKdeleteRecord"
+                            (click)='setPBPKSeletedItem(pbpkDetail)'>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row align">
+                  <div class="alert alert-info"> <strong>Compound Selected :</strong> {{CompoundTitle}}
+                    <button type="button" class="btn btn-primary" (click)="naviateToPopPK()">
+                      <i class="fa fa-plus-circle" aria-hidden="true"> </i>
+                      Add New POP-PK
+                    </button>
+                  </div>
+                </div>
+                <div class="row align" *ngIf="PopPKLength===0">
+                  <div class="alert alert-danger"> <strong>Alert!</strong> There is no Pop-Pk Data
+                    Related with
+                    the selected Compound. </div>
+                </div>
+                <div class="row align" *ngIf="PopPKLength !==0">
+                  <table class="table table-striped">
+                    <thead class="tblHead">
+                      <tr>
+                        <th>Study Number</th>
+                        <th>Source</th>
+                        <th>Formal Analysis</th>
+                        <th>Secondary drug</th>
+                        <th>Study population</th>
+                        <th>Cmax</th>
+                        <th>Tmax</th>
+                        <th>T1/2</th>
+                        <th>Cmin or Ctau</th>
+                        <th>AUC0-t</th>
+                        <th>AUC0-inf</th>
+                        <th>Created By</th>
+                        <th>Modified</th>
+                        <th *ngIf="isAdminTrue !== false">Edit</th>
+                        <th *ngIf="isAdminTrue !== false">Delete</th><!-- Need to hide for other users-->
+                      </tr>
+                    </thead>
+                    <tbody class="tblBody">
+                      <tr *ngFor="let poppkDetail of PopPKItem">
+                        <td>{{poppkDetail.Title}}</td>
+                        <td>{{poppkDetail.poppkSource}}</td>
+                        <td>{{poppkDetail.poppkFormalAnalysis}}</td>
+                        <td>{{poppkDetail.poppkSecondarydrug}}</td>
+                        <td>{{poppkDetail.poppkStudypopulation}}</td>
+                        <td>{{poppkDetail.poppkCmax}}</td>
+                        <td>{{poppkDetail.poppkTmax}}</td>
+                        <td>{{poppkDetail.poppkToneandhalf}}</td>
+                        <td>{{poppkDetail.poppkCminorCtau}}</td>
+                        <td>{{poppkDetail.poppkAUC0t}}</td>
+                        <td>{{poppkDetail.poppkAUC0inf}}</td>
+                        <td>{{poppkDetail.Editor.Title}}</td>
+                        <td>{{poppkDetail.Modified | date}}</td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a [routerLink]="['/editPopPK', poppkDetail.Id, routeType, CompoundID]">
+                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                        <td *ngIf="isAdminTrue !== false">
+                          <!-- Need to hide for other users-->
+                          <a class="dltLink" data-toggle="modal" data-target="#PopPKdeleteRecord"
+                            (click)='setPopPKSeletedItem(poppkDetail)'>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="stdongoingdeleteRecord" role="dialog">
+  <app-delete-record [stdData]='delOngItem' [EventType]="'ongItem'" (OnDeleteClickEvent)='OnStdOngingChange($event)'>
+  </app-delete-record>
+</div>
+<div class="modal fade" id="ctddeleteRecord" role="dialog">
+  <app-delete-record [ctdData]='delctdItem' [EventType]="'ctdItem'" (OnDeleteClickEvent)='OnCtdOngingChange($event)'>
+  </app-delete-record>
+</div>
+<div class="modal fade" id="NBAdeleteRecord" role="dialog">
+  <app-delete-record [NCAData]='delNCAItem' [EventType]="'NCAItem'" (OnDeleteClickEvent)='OnNCAChange($event)'>
+  </app-delete-record>
+</div>
+<div class="modal fade" id="PBPKdeleteRecord" role="dialog">
+  <app-delete-record [PBPKData]='delPBPKItem' [EventType]="'PBPKItem'" (OnDeleteClickEvent)='OnPBPKBChange($event)'>
+  </app-delete-record>
+</div>
+<div class="modal fade" id="PopPKdeleteRecord" role="dialog">
+  <app-delete-record [PopPKData]='delPopPKItem' [EventType]="'PopPKItem'" (OnDeleteClickEvent)='OnPopPKChange($event)'>
+  </app-delete-record>
+</div>

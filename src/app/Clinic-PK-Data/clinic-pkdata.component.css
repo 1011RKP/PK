@@ -18,21 +18,11 @@
 }
 
 .mainPadding {
-  padding-top: 5px;
-  /*padding-right: 30px;
+  /* padding-right: 30px;
   padding-left: 30px;*/
 }
 
-.compLink {
+.dltLink {
   cursor: pointer !important;
-  padding: 5px;
-}
-
-#compLink {
-  float: right !important;
-  margin-top: -18px;
-  color: white;
-  border-radius: 50%;
-  background: white;
-  padding-bottom: 3px;
+  ;
 }

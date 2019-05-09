@@ -1,30 +1,29 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../app.service';
-import { CompletedStudies } from '../data';
+import { OngoingStudies } from '../data';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
-
+//'ng2-toastr/ng2-toastr';
 
 @Component({
-  selector: 'app-edit-ctd-studies',
-  templateUrl: './edit-ctd-studies.component.html',
-  styleUrls: ['./edit-ctd-studies.component.css']
+  selector: 'app-editstd-studies',
+  templateUrl: './editstd-studies.component.html',
+  styleUrls: ['./editstd-studies.component.css']
 })
-export class EditCtdStudiesComponent implements OnInit {
-
-  ctdStudyNumber: string;
-  ctdStudyName: string;
-  ctdStudyConclusion: string;
-  ctdClinicalPKrep: string;
-  ctdClinPharmRep: string;
-  ctdProtocol: string;
-  ctdClinicalPKreport: string;
-
+export class EditstdStudiesComponent implements OnInit {
+  ongStudyNumber: string;
+  ongStudyName: string;
+  ongClinicalPKrep: string;
+  ongClinicalPKreportDescription: string;
+  ongClinicalPKreportURL: string
+  ongClinPharmRep: string;
+  ongProtocolDescrption: string;
+  ongProtocolURL: string;
   itemid: string;
   type: string;
-  ongItem: CompletedStudies;
+  ongItem: OngoingStudies;
   allCompound: Component;
   studiesobjLength: number;
   error: string;
@@ -100,7 +99,7 @@ export class EditCtdStudiesComponent implements OnInit {
             console.log('NO Data');
           } else {
             this.CompoundTitle = compoundData.d.results[0].Title;
-            this.router.navigate(['/displayClinicPKData', this.CompoundID, this.CompoundTitle, "studiesCompleted"]);
+            this.router.navigate(['/displayClinicPKData', this.CompoundID, this.CompoundTitle, "studiesOngoing"]);
           }
         },
         (error) => {
@@ -109,8 +108,7 @@ export class EditCtdStudiesComponent implements OnInit {
         });
   }
 
-
-  postDatatocompletedStudies(form: NgForm): void {
+  postDatatoOngoingStudies(form: NgForm): void {
     if (this.CompoundID !== '') {
       this._appService.getService().subscribe(
         (res) => {
@@ -119,16 +117,23 @@ export class EditCtdStudiesComponent implements OnInit {
           if (res.length !== 0) {
             // console.log('res' + res.d.GetContextWebInformation.FormDigestValue);
             // console.log('Inside Click');
-            const url = '/_api/web/lists/getbytitle(\'CompletedStudies\')/items';
+            const url = '/_api/web/lists/getbytitle(\'OngoingStudies\')/items';
             this._appService.addDatatoList(url, {
               CompoundId: this.CompoundID,
-              Title: this.ctdStudyName,
-              ctdStudyNumbe: this.ctdStudyNumber,
-              ctdStudyConclusion: this.ctdStudyConclusion,
-              ctdClinicalPKrep: this.ctdClinicalPKrep,
-              ctdClinPharmRep: this.ctdClinPharmRep,
-              ctdProtocol: this.ctdProtocol,
-              ctdClinicalPKreport: this.ctdClinicalPKreport
+              Title: this.ongStudyNumber,
+              ongStudyName: this.ongStudyName,
+              ongClinicalPKrep: this.ongClinicalPKrep,
+              ongClinPharmRep: this.ongClinPharmRep,
+              ongProtocol:
+              {
+                'Description': this.ongProtocolDescrption,
+                'Url': this.ongProtocolURL
+              },
+              ongClinicalPKreport:
+              {
+                'Description': this.ongClinicalPKreportDescription,
+                'Url': this.ongClinicalPKreportURL
+              },
             }, res.d.GetContextWebInformation.FormDigestValue)
               .subscribe(
                 (dataresponse) => {
@@ -161,20 +166,27 @@ export class EditCtdStudiesComponent implements OnInit {
     }
   }
 
-  editCompletedStudies(form: NgForm): void {
+  editongoingStudies(form: NgForm): void {
     if (this.itemid !== '') {
       this._appService.getService().subscribe(
         (res) => {
           if (res.length !== 0) {
-            const url = '/_api/web/lists/getbytitle(\'CompletedStudies\')/items(' + this.itemid + ')';
+            const url = '/_api/web/lists/getbytitle(\'OngoingStudies\')/items(' + this.itemid + ')';
             this._appService.editDatatoList(url, {
-              Title: this.ctdStudyName,
-              ctdStudyNumbe: this.ctdStudyNumber,
-              ctdStudyConclusion: this.ctdStudyConclusion,
-              ctdClinicalPKrep: this.ctdClinicalPKrep,
-              ctdClinPharmRep: this.ctdClinPharmRep,
-              ctdProtocol: this.ctdProtocol,
-              ctdClinicalPKreport: this.ctdClinicalPKreport
+              Title: this.ongStudyNumber,
+              ongStudyName: this.ongStudyName,
+              ongClinicalPKrep: this.ongClinicalPKrep,
+              ongClinPharmRep: this.ongClinPharmRep,
+              ongProtocol:
+              {
+                'Description': this.ongProtocolDescrption,
+                'Url': this.ongProtocolURL
+              },
+              ongClinicalPKreport:
+              {
+                'Description': this.ongClinicalPKreportDescription,
+                'Url': this.ongClinicalPKreportURL
+              },
             }, res.d.GetContextWebInformation.FormDigestValue)
               .subscribe(
                 (dataresponse) => {
@@ -198,20 +210,20 @@ export class EditCtdStudiesComponent implements OnInit {
   }
 
   getOngoingStudiesData(id: string): void {
-    const select = '?$select=Id,Title,ctdStudyName,ctdStudyConclusion,ctdClinicalPKrep,ctdClinicalPKreport,ctdClinPharmRep,Created,ctdProtocol,Editor/Title,Modified,Compound/Id,Compound/Title';
+    const select = '?$select=Id,Title,ongStudyName,ongClinicalPKrep,ongClinicalPKreport,ongClinPharmRep,Created,ongProtocol,Editor/Title,Modified,Compound/Id,Compound/Title';
     const expand = '&$expand=Compound/Id,Editor/Title,Compound/Title';
     const filter = '&$filter=(Id eq ' + id + ')';
     const order = '&$orderby=Created desc';
-    const url = '/_api/web/lists/getbytitle(\'CompletedStudies\')/items' + select + expand + filter + order;
+    const url = '/_api/web/lists/getbytitle(\'OngoingStudies\')/items' + select + expand + filter + order;
     this._appService.getListItem(url)
       .subscribe(
-        (ctd) => {
-          if (ctd == null) {
+        (ongItem) => {
+          if (ongItem == null) {
           } else {
-            console.log(ctd);
-            this.ongItem = ctd.d.results;
+            console.log(ongItem);
+            this.ongItem = ongItem.d.results;
             this.setFormData(this.ongItem);
-            this.studiesobjLength = ctd.d.results.length
+            this.studiesobjLength = ongItem.d.results.length
           }
         },
         (error) => {
@@ -219,14 +231,15 @@ export class EditCtdStudiesComponent implements OnInit {
         });
   }
 
-  setFormData(data: CompletedStudies): void {
-    this.ctdStudyName = data[0].Title;//.toString();
-    this.ctdStudyNumber = data[0].ctdStudyNumber;//.toString();
-    this.ctdStudyConclusion = data[0].ctdStudyConclusion;//.toString();
-    this.ctdClinicalPKrep = data[0].ctdClinicalPKrep;//.toString();
-    this.ctdClinPharmRep = data[0].ctdClinPharmRep;//.toString();
-    this.ctdProtocol = data[0].ctdProtocol;//.toString();
-    this.ctdClinicalPKreport = data[0].ctdClinicalPKreport;//.toString();
+  setFormData(data: OngoingStudies): void {
+    this.ongStudyNumber = data[0].Title;//.toString();
+    this.ongStudyName = data[0].ongStudyName;//.toString();
+    this.ongClinicalPKrep = data[0].ongClinicalPKrep;//.toString();    
+    this.ongClinPharmRep = data[0].ongClinPharmRep;//.toString();
+    this.ongClinicalPKreportDescription = (data[0].ongClinicalPKreport !== null) ? data[0].ongClinicalPKreport.Description : '';
+    this.ongClinicalPKreportURL = (data[0].ongClinicalPKreport !== null) ? data[0].ongClinicalPKreport.Url : '';
+    this.ongProtocolDescrption = (data[0].ongProtocol !== null) ? data[0].ongProtocol.Description : '';
+    this.ongProtocolURL = (data[0].ongProtocol !== null) ? data[0].ongProtocol.Url : '';
     this.CompoundID = data[0].Compound.Id;//.toString();
     this.CompoundTitle = data[0].Compound.Title;//.toString();
   }
