@@ -34,10 +34,11 @@
 
 .col-form-label {
   font-size: 12px !important;
-  color: #474747 !important;
+  color: #000000 !important;
   /* padding: 9px!important; */
   padding-top: 3px !important;
   padding-bottom: 3px !important;
+  font-weight: 500 !important;
 
 }
 
@@ -70,4 +71,3 @@
 .backgroundColor {
   background-color: rgb(232, 235, 236) !important;
 }
-

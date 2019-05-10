@@ -11,27 +11,42 @@
       <div class="panel-body">
         <div class="row">
           <form #completedStudies="ngForm" class="form-horizontal" role="form">
-            <!-- <div class="form-group row">
-                <div class="alert alert-success" *ngIf='message'>
-                  <strong>Success!</strong> {{message}}
-                </div>
-                <div class="alert alert-danger" *ngIf='error'>
-                  <strong>Danger!</strong> {{error}}
-                </div>
-              </div> -->
-            <div class="form-group">
+            <!--
+               <div class="form-group" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+                 [class.has-success]="studyNumber.valid">
+                 <div class="container">
+                   <div class="col-sm-6">
+                     <label class="col-form-label">Study Number</label>
+                     <input class="form-control" type="text" [(ngModel)]='pbpkStudyNumber' name="pbpkStudyNumber"
+                       #studyNumber="ngModel" required />
+                     <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                       Study Number
+                     </span>
+                   </div>
+            -->
+            <div class="form-group" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+              [class.has-success]="studyNumber.valid">
               <div class="row">
                 <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                  <label class="col-form-label">Study Number</label>
-                  <input class="form-control" type="text" [(ngModel)]='ctdStudyNumber' name="ctdStudyNumber" />
+                  <label class="col-form-label">Study Number*</label>
+                  <input class="form-control" type="text" [(ngModel)]='ctdStudyNumber' name="ctdStudyNumber"
+                    #studyNumber="ngModel" required />
+                  <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                    Study Number is Mandatory
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="studyName.invalid && studyName.touched"
+              [class.has-success]="studyName.valid">
               <div class="row">
                 <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                  <label class="col-form-label">Study Name</label>
-                  <input class="form-control" type="text" [(ngModel)]="ctdStudyName" name="ctdStudyName" />
+                  <label class="col-form-label">Study Name*</label>
+                  <input class="form-control" type="text" [(ngModel)]="ctdStudyName" name="ctdStudyName"
+                    #studyName="ngModel" required />
+                  <span class="help-block" *ngIf="studyName.invalid && studyName.touched">
+                    Study Name is Mandatory
+                  </span>
                 </div>
               </div>
             </div>
@@ -67,24 +82,33 @@
                     name="ctdProtocolDescrption" />
                 </div>
                 <div class="col-sm-offset-1 col-sm-5">
-                  <label class="col-form-label">Protocol URL</label>
-                  <input class="form-control" type="text" [(ngModel)]="ctdProtocolURL" name="ctdProtocolURL" />
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-offset-1 col-sm-4">
                   <label class="col-form-label">Clinical PK report Descrption
                   </label>
                   <input class="form-control" type="text" [(ngModel)]="ctdClinicalPKreportDescrption"
                     name="ctdClinicalPKreportDescrption" />
                 </div>
-                <div class="col-sm-offset-1 col-sm-5">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-4" [class.has-error]="ProtocolURL.invalid && ProtocolURL.touched"
+                  [class.has-success]="ProtocolURL.valid">
+                  <label class="col-form-label">Protocol URL</label>
+                  <input class="form-control" type="text" [(ngModel)]="ctdProtocolURL" name="ctdProtocolURL"
+                    #ProtocolURL="ngModel" pattern="https?://.+" />
+                  <span class="help-block" *ngIf="ProtocolURL.invalid && ProtocolURL.touched">
+                    Please Enter Valid URL
+                  </span>
+                </div>
+                <div class="col-sm-offset-1 col-sm-5" [class.has-error]="PKreportURL.invalid && PKreportURL.touched"
+                  [class.has-success]="PKreportURL.valid">
                   <label class="col-form-label">Clinical PK report URL
                   </label>
                   <input class="form-control" type="text" [(ngModel)]="ctdClinicalPKreportURL"
-                    name="ctdClinicalPKreportURL" />
+                    name="ctdClinicalPKreportURL" #PKreportURL="ngModel" pattern="https?://.+" />
+                  <span class="help-block" *ngIf="PKreportURL.invalid && PKreportURL.touched">
+                    Please Enter Valid URL
+                  </span>
                 </div>
               </div>
             </div>

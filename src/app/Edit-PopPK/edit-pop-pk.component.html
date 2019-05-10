@@ -13,6 +13,22 @@
           <form #PopPK="ngForm" class="form-horizontal" role="form">
             <div class="container">
               <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: Pop -PK-->
+              <!-- 
+               <div class="form-group" [class.has-error]="titleControl.invalid && titleControl.touched"
+                 [class.has-success]="titleControl.valid">
+                 <div class="col-md-2 col-sm-2">
+                   <label class="control-label">
+                     Title
+                   </label>
+                 </div>
+                 <div class="col-md-10 col-sm-10">
+                   <input class="form-control" type="text" [(ngModel)]='title' name="title" #titleControl="ngModel"
+                     required />
+                   <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
+                     Title is required
+                   </span>
+                 </div>
+               </div> -->
               <div class=form-group>
                 <div class="container">
                   <div class="alert alert-info">
@@ -22,9 +38,14 @@
               </div>
               <div class="form-group">
                 <div class="container">
-                  <div class="col-sm-6 ">
-                    <label class="col-form-label">Study Number</label>
-                    <input class="form-control" type="text" [(ngModel)]='poppkStudyNumber' name="poppkStudyNumber" />
+                  <div class="col-sm-6" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+                    [class.has-success]="studyNumber.valid">
+                    <label class="col-form-label">Study Number*</label>
+                    <input class="form-control" type="text" [(ngModel)]='poppkStudyNumber' name="poppkStudyNumber"
+                      #studyNumber="ngModel" required />
+                    <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                      Study Number is Mandatory
+                    </span>
                   </div>
                   <div class="col-sm-6">
                     <label class="col-form-label">Source</label>

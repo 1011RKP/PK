@@ -18,7 +18,24 @@
                 <div class="alert alert-danger" *ngIf='error'>
                   <strong>Danger!</strong> {{error}}
                 </div>
-              </div> -->
+              </div> 
+            
+            <div class="form-group" [class.has-error]="titleControl.invalid && titleControl.touched"
+              [class.has-success]="titleControl.valid">
+              <div class="col-md-2 col-sm-2">
+                <label class="control-label">
+                  Title
+                </label>
+              </div>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" [(ngModel)]='title' name="title" #titleControl="ngModel" required />
+                <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
+                  Title is required
+                </span>
+              </div>
+            </div>
+
+            -->
             <div class=form-group>
               <div class="container align">
                 <div class="alert alert-info">
@@ -26,19 +43,29 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+              [class.has-success]="studyNumber.valid">
               <div class="row">
                 <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                  <label class="col-form-label">Study Number</label>
-                  <input class="form-control" type="text" [(ngModel)]='ongStudyNumber' name="StudyNumber" />
+                  <label class="col-form-label">Study Number*</label>
+                  <input class="form-control" type="text" [(ngModel)]='ongStudyNumber' name="StudyNumber"
+                    #studyNumber="ngModel" required />
+                  <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                    Study Number is Mandatory
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="studyName.invalid && studyName.touched"
+              [class.has-success]="studyName.valid">
               <div class="row">
                 <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-                  <label class="col-form-label">Study Name</label>
-                  <input class="form-control" type="text" [(ngModel)]="ongStudyName" name="StudyName" />
+                  <label class="col-form-label">Study Name*</label>
+                  <input class="form-control" type="text" [(ngModel)]="ongStudyName" #studyName="ngModel"
+                    name="StudyName" required />
+                  <span class="help-block" *ngIf="studyName.invalid && studyName.touched">
+                    Study Name is Mandatory
+                  </span>
                 </div>
               </div>
             </div>
@@ -66,33 +93,43 @@
                     name="ongProtocolDescrption" />
                 </div>
                 <div class="col-sm-offset-1 col-sm-5">
-                  <label class="col-form-label">Protocol URL</label>
-                  <input class="form-control" type="text" [(ngModel)]="ongProtocolURL" name="ongProtocolURL" />
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-offset-1 col-sm-4">
                   <label class="col-form-label">Clinical PK report Descrption</label>
                   <input class="form-control" type="text" [(ngModel)]="ongClinicalPKreportDescription"
                     name="ongClinicalPKreportDescription" />
                 </div>
-                <div class="col-sm-offset-1 col-sm-5">
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-4" [class.has-error]="ProtocolURL.invalid && ProtocolURL.touched"
+                  [class.has-success]="ProtocolURL.valid">
+                  <label class="col-form-label">Protocol URL</label>
+                  <input class="form-control" type="text" [(ngModel)]="ongProtocolURL" name="ongProtocolURL"
+                    #ProtocolURL="ngModel" pattern="https?://.+" />
+                  <span class="help-block" *ngIf="ProtocolURL.invalid && ProtocolURL.touched">
+                    Please Enter Valid URL
+                  </span>
+                </div>
+                <div class="col-sm-offset-1 col-sm-5" [class.has-error]="PKreportURL.invalid && PKreportURL.touched"
+                  [class.has-success]="PKreportURL.valid">
                   <label class="col-form-label">Clinical PK report URL</label>
                   <input class="form-control" type="text" [(ngModel)]="ongClinicalPKreportURL"
-                    name="ongClinicalPKreportURL" />
+                    name="ongClinicalPKreportURL" #PKreportURL="ngModel" pattern="https?://.+" />
+                  <span class="help-block" *ngIf="PKreportURL.invalid && PKreportURL.touched">
+                    Please Enter Valid URL
+                  </span>
                 </div>
               </div>
             </div>
             <div class="form-group row divpadding">
               <div class="container pull-right">
-                <button type="submit" class="btn btn-primary btnPadding" *ngIf='type === "New"'
-                  (click)='postDatatoOngoingStudies(ongoingStudies)' [disabled]="!ongoingStudies.valid">
+                <button type="submit" [disabled]="ongoingStudies.invalid" class="btn btn-primary btnPadding"
+                  *ngIf='type === "New"' (click)='postDatatoOngoingStudies(ongoingStudies)'>
                   <i class="fa fa-plus-circle" aria-hidden="true"> </i> Add New
                 </button>
                 <button type="submit" class="btn btn-primary btnPadding" *ngIf='type !== "New"'
-                  (click)='editongoingStudies(ongoingStudies)' [disabled]="!ongoingStudies.valid">
+                  [disabled]="ongoingStudies.invalid" (click)='editongoingStudies(ongoingStudies)'>
                   <i class="fa fa-pencil" aria-hidden="true"></i> Edit Record</button>
                 <button type="button" class="btn btn-default" (click)='cancel()'>
                   <i class="fa fa-times" aria-hidden="true"> </i>Cancel

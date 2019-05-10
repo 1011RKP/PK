@@ -13,6 +13,18 @@
           <form #NCAandPBKB="ngForm" class="form-horizontal" role="form">
             <div class="container">
               <!-- ** linical Pharmacokinetics Information  Compound: 54828 (pemigatinib) Type of Analysis: NCA-->
+              <!-- 
+               <div class="form-group" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+                 [class.has-success]="studyNumber.valid">
+                 <div class="container">
+                   <div class="col-sm-6">
+                     <label class="col-form-label">Study Number</label>
+                     <input class="form-control" type="text" [(ngModel)]='pbpkStudyNumber' name="pbpkStudyNumber"
+                       #studyNumber="ngModel" required />
+                     <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                       Study Number
+                     </span>
+                   </div> -->
               <div class=form-group>
                 <div class="container">
                   <div class="alert alert-info">
@@ -22,9 +34,14 @@
               </div>
               <div class="form-group">
                 <div class="container">
-                  <div class="col-sm-6">
-                    <label class="col-form-label">Study Number</label>
-                    <input class="form-control" type="text" [(ngModel)]='ncaStudyNumber' name="ncaStudyNumber" />
+                  <div class="col-sm-6" [class.has-error]="studyNumber.invalid && studyNumber.touched"
+                    [class.has-success]="studyNumber.valid">
+                    <label class="col-form-label">Study Number*</label>
+                    <input class="form-control" type="text" [(ngModel)]='ncaStudyNumber' name="ncaStudyNumber"
+                      #studyNumber="ngModel" required />
+                    <span class="help-block" *ngIf="studyNumber.invalid && studyNumber.touched">
+                      Study Number is Mandatory
+                    </span>
                   </div>
                   <div class="col-sm-6">
                     <label class="col-form-label">Source</label>
