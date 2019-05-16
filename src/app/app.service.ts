@@ -10,8 +10,10 @@ const httpOptions = {
 
 @Injectable()
 export class AppService {
-  private siteURL = 'https://incytedev.sharepoint.com/sites/ClinPK';
-  //private siteURL = 'https://incytedev.sharepoint.com/sites/DMB/DDI';
+  //private siteURL = 'https://incytedev.sharepoint.com/sites/ClinPK';
+  private siteURL = 'https://incytetest.sharepoint.com/sites/ClinPK';
+  //private siteURL = 'https://incyteuat.sharepoint.com/sites/ClinPK';
+  //private siteURL = 'https://incyte.sharepoint.com/sites/ClinPK';
   RequestDigest: string;
 
   constructor(

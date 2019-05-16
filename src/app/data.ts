@@ -1,5 +1,8 @@
 export class Constents {
-  static readonly url = "https://incytedev.sharepoint.com/sites/ClinPK/"
+  //static readonly url = "https://incytedev.sharepoint.com/sites/ClinPK/"
+  static readonly url = "https://incytetest.sharepoint.com/sites/ClinPK/"
+  // static readonly url = "https://incytedev.sharepoint.com/sites/ClinPK/"
+  // static readonly url = "https://incytedev.sharepoint.com/sites/ClinPK/"
 }
 
 export class Compound {
